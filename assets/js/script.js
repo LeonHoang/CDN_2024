@@ -1,7 +1,7 @@
-import { reverseUsingStack } from "./stack.js";
-import { reverseString } from "./queue.js";
-import { reverseStringLinkedList } from "./linkedList.js";
-import { reverseStringArr } from "./array.js";
+import { reverseStringUsingStack } from "./stack.js";
+import { reverseStringUsingQueue } from "./queue.js";
+import { reverseStringUsingLinkedList } from "./linkedList.js";
+import { reverseStringUsingArray } from "./array.js";
 
 const randomString = (length) => {
   const alphabet =
@@ -10,32 +10,35 @@ const randomString = (length) => {
   for (let i = 0; i < length; i++) {
     text += alphabet.charAt(Math.floor(Math.random() * alphabet.length - 1));
   }
-  inputValue.innerText = text;
+  
+  return text;
 };
 
 const container = document.querySelector(".container");
-const formRandomLength = container.querySelector("#form-random-length");
-const lengthInput = container.querySelector("#length-input");
+const time = container.querySelector("#time");
+
+// button
 const stackBtn = container.querySelector("#stack-btn");
 const queueBtn = container.querySelector("#queue-btn");
 const linkedListBtn = container.querySelector("#linked-list-btn");
 const arrBtn = container.querySelector("#arr-btn");
-const customFile = container.querySelector("#custom-file");
-const saveBtn = document.querySelector("#save-btn");
-const content = container.querySelector("#content");
+const saveBtn = container.querySelector("#save-btn");
+const compareBtn = container.querySelector("#compare-btn");
+
+// io
 const inputValue = container.querySelector("#input-value");
 const inputReverse = container.querySelector("#rev-text");
-const fileForm = document.querySelector("#file-form");
-const time = document.querySelector("#time");
+const formRandomLength = container.querySelector("#form-random-length");
+const lengthInput = container.querySelector("#length-input");
+const customFile = container.querySelector("#custom-file");
 
 formRandomLength.addEventListener("submit", (e) => {
   e.preventDefault();
   console.log();
-  if (isNaN(lengthInput.value)) {
+  if (isNaN(lengthInput.value) ) {
     Toastify({
-      text: "Length of string ins't ber",
+      text: "input is not a number",
       duration: 3000,
-      destination: "https://github.com/apvarun/toastify-js",
       newWindow: true,
       close: true,
       gravity: "top", // `top` or `bottom`
@@ -48,11 +51,11 @@ formRandomLength.addEventListener("submit", (e) => {
     inputValue.innerText = "";
     return;
   }
-  randomString(lengthInput.value);
+  var inputText = randomString(lengthInput.value);
+  inputValue.innerText = inputText;
   Toastify({
     text: "Random string is success",
     duration: 3000,
-    destination: "https://github.com/apvarun/toastify-js",
     newWindow: true,
     close: true,
     gravity: "top", // `top` or `bottom`
@@ -66,10 +69,36 @@ formRandomLength.addEventListener("submit", (e) => {
 
 customFile.addEventListener("input", (e) => {
   const file = customFile.files[0];
-  if (file) {
+  if (!file) {
+    return;
+  }
+
+  console.log(file)
+  var ext_file = file.name.split('.').pop()
+  console.log(ext_file)
+  if(['doc', 'docx'].includes(ext_file)){
     convertToPlainText(file).then((text) => {
       inputValue.innerText = text;
     });
+  }else if(ext_file == 'txt'){
+    const reader = new FileReader();
+    reader.addEventListener('load', (event) => {
+      inputValue.innerText = event.target.result;;
+    });
+    reader.readAsText(file);
+  }else {
+    Toastify({
+      text: "accept .doc, .docx, .txt only",
+      duration: 3000,
+      newWindow: true,
+      close: true,
+      gravity: "top", // `top` or `bottom`
+      position: "right", // `left`, `center` or `right`
+      stopOnFocus: true, // Prevents dismissing of toast on hover
+      style: {
+        background: "rgb(7, 205, 7)",
+      },
+    }).showToast();
   }
 });
 
@@ -78,7 +107,6 @@ const ToastComponent = (message) => {
   Toastify({
     text: message,
     duration: 3000,
-    destination: "https://github.com/apvarun/toastify-js",
     newWindow: true,
     close: true,
     gravity: "top", // `top` or `bottom`
@@ -98,11 +126,11 @@ const stackFunction = () => {
   }
   const startTime = performance.now();
   for (let i = 0; i < 10; i++) {
-    const result = reverseUsingStack(inputValue.value);
+    const result = reverseStringUsingStack(inputValue.value);
     inputReverse.value = result;
   }
   const endTime = performance.now();
-  time.innerText = `Thời gian thực hiện: ${(endTime - startTime).toFixed(3)}s`;
+  time.innerText = `Thời gian thực hiện: ${(endTime - startTime).toFixed(3)} milliseconds`;
   ToastComponent(`Reverse completed with Stack`);
 };
 
@@ -114,11 +142,11 @@ const queueFunction = () => {
   }
   const startTime = performance.now();
   for (let i = 0; i < 10; i++) {
-    const result = reverseUsingStack(inputValue.value);
+    const result = reverseStringUsingQueue(inputValue.value);
     inputReverse.value = result;
   }
   const endTime = performance.now();
-  time.innerText = `Thời gian thực hiện: ${(endTime - startTime).toFixed(3)}s`;
+  time.innerText = `Thời gian thực hiện: ${(endTime - startTime).toFixed(3)} milliseconds`;
   ToastComponent(`Reverse completed with Queue`);
 };
 
@@ -130,11 +158,11 @@ const linkedFunction = () => {
   }
   const startTime = performance.now();
   for (let i = 0; i < 10; i++) {
-    const result = reverseUsingStack(inputValue.value);
+    const result = reverseStringUsingLinkedList(inputValue.value);
     inputReverse.value = result;
   }
   const endTime = performance.now();
-  time.innerText = `Thời gian thực hiện: ${(endTime - startTime).toFixed(3)}s`;
+  time.innerText = `Thời gian thực hiện: ${(endTime - startTime).toFixed(3)} milliseconds`;
   ToastComponent(`Reverse completed with Linked`);
 };
 
@@ -146,19 +174,80 @@ const arrayFunction = () => {
   }
   const startTime = performance.now();
   for (let i = 0; i < 10; i++) {
-    const result = reverseStringArr(inputValue.value);
+    const result = reverseStringUsingArray(inputValue.value);
     inputReverse.value = result;
   }
   const endTime = performance.now();
-  time.innerText = `Thời gian thực hiện: ${(endTime - startTime).toFixed(3)}s`;
+  time.innerText = `Thời gian thực hiện: ${(endTime - startTime).toFixed(3)} milliseconds`;
   ToastComponent(`Reverse completed with Array`);
 };
 
-// RUN
+//Hàm compare
+const compareFunction = () => {
+  // init
+  let inputArr = [];
+  let excuteTime = [];
+  let algNum = 0;
+  let loopNum = 100;
+  let min = 10000;
+  let max = 100000;
+  for (let index = 0; index < loopNum; index++) {
+    let input = randomString(Math.floor(Math.random() * (max - min) ) + min);
+    inputArr[index] = input
+  }
+  // Queue
+  let sum = 0;
+  for (let index = 0; index < loopNum; index++) {
+    const startTime = performance.now();
+    reverseStringUsingQueue(inputArr[index]);
+    const endTime = performance.now();
+    sum = (endTime - startTime).toFixed(3)
+  }
+  excuteTime[algNum] = sum / loopNum;
+  algNum++;
+
+  // stack
+  sum = 0;
+  for (let index = 0; index < loopNum; index++) {
+    const startTime = performance.now();
+    reverseStringUsingStack(inputArr[index]);
+    const endTime = performance.now();
+    sum = (endTime - startTime).toFixed(3)
+  }
+  excuteTime[algNum] = sum / loopNum;
+  algNum++;
+
+  // Linked
+  sum = 0;
+  for (let index = 0; index < loopNum; index++) {
+    const startTime = performance.now();
+    reverseStringUsingLinkedList(inputArr[index]);
+    const endTime = performance.now();
+    sum = (endTime - startTime).toFixed(3)
+  }
+  excuteTime[algNum] = sum / loopNum;
+  algNum++;
+
+  // array
+  sum = 0;
+  for (let index = 0; index < loopNum; index++) {
+    const startTime = performance.now();
+    reverseStringUsingArray(inputArr[index]);
+    const endTime = performance.now();
+    sum = (endTime - startTime).toFixed(3)
+  }
+  excuteTime[algNum] = sum / loopNum;
+
+  alert(`Thời gian thực hiện: \nQueue: ${excuteTime[0]} milliseconds\nStack: ${excuteTime[1]} milliseconds\nLinked: ${excuteTime[2]} milliseconds\nArray: ${excuteTime[3]} milliseconds`);
+
+};
+
+// addEventListener
 stackBtn.addEventListener("click", stackFunction);
 queueBtn.addEventListener("click", queueFunction);
 linkedListBtn.addEventListener("click", linkedFunction);
 arrBtn.addEventListener("click", arrayFunction);
+compareBtn.addEventListener("click", compareFunction);
 
 //export file
 saveBtn.addEventListener("click", () => {
@@ -175,7 +264,6 @@ saveBtn.addEventListener("click", () => {
   Toastify({
     text: "Save success",
     duration: 3000,
-    destination: "https://github.com/apvarun/toastify-js",
     newWindow: true,
     close: true,
     gravity: "top", // `top` or `bottom`

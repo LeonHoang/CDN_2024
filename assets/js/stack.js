@@ -39,7 +39,7 @@ class Stack {
 }
 
 // Function to reverse the string
-export function reverseUsingStack(str) {
+export function reverseStringUsingStack(str) {
   let resultStr = [];
   // Create a stack of capacity
   // equal to length of string

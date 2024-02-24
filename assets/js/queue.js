@@ -16,7 +16,7 @@ class Queue {
   }
 }
 
-export function reverseString(s) {
+export function reverseStringUsingQueue(s) {
   let queue = new Queue();
   let result = "";
 
