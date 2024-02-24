@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home</title>
+    <link rel="stylesheet" href="../assets/styles/index.css" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <h1 class="text-center my-md text-uppercase">Reverse String</h1>
+      <div class="my-md">
+        <h3 class="text-center my-md">Số lượng ký tự ngẫu nhiên</h3>
+        <form
+          action=""
+          class="flex justify-center gap-md"
+          id="form-random-length"
+        >
+          <input
+            type="text"
+            placeholder="import string length..."
+            id="length-input"
+            class="input-control"
+          />
+          <button class="btn btn-success">OK</button>
+        </form>
+      </div>
+      <div class="flex all-center column">
+        <div class="bd-example my-md">
+          <div class="my-md flex all-center gap-md">
+            <div>
+              <input type="file" class="form-control" id="custom-file" />
+            </div>
+            <button id="save-btn" class="btn btn btn-primary">Save file</button>
+          </div>
+        </div>
+        <div class="flex all-center gap-md">
+          <button id="stack-btn" type="button" class="btn btn-primary">
+            Stack
+          </button>
+          <button id="queue-btn" type="button" class="btn btn-primary">
+            Queue
+          </button>
+          <button id="linked-list-btn" type="button" class="btn btn-primary">
+            Linked List
+          </button>
+          <button id="arr-btn" type="button" class="btn btn-primary">
+            Array
+          </button>
+        </div>
+        <div id="time" class="my-md">Time run: ?</div>
+        <div id="content" class="flex items-center my-md gap-md">
+          <div class="flex column items-center gap-md">
+            <label for="">INPUT</label>
+            <textarea
+              style="resize: none"
+              id="input-value"
+              class="textarea-custom p-md"
+              rows="10"
+              spellcheck="false"
+              placeholder="Type your text here..."
+            ></textarea>
+          </div>
+          <div class="flex column items-center gap-md">
+            <label for="">OUTPUT</label>
+            <textarea
+              style="resize: none"
+              id="rev-text"
+              class="textarea-custom p-md"
+              rows="10"
+              placeholder="Result..."
+            ></textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="flex justify-center">
+      <a href="./end.html" class="btn btn-primary">Kết thúc</a>
+    </div>
+
+    <!-- Script file -->
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"
+      integrity="sha512-sG5Q7boJL+ft/weuz6Mmi9XBD+bEzE9AI2FMP4YMFxp3FpTFUQSQQm5K5cSgJCyed6bWs3W8f8h0lp36lHXhQA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/toastify-js"
+    ></script>
+    <script type="module" src="../assets/js/script.js"></script>
+  </body>
+</html>

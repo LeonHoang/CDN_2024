@@ -1,0 +1,89 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    outline: 0;
+}
+html {
+    font-size: 10px;
+}
+body {
+    font-size: 1.6rem;
+}
+.text-center {
+    text-align: center;
+}
+.text-uppercase {
+    text-transform: uppercase;
+}
+.flex.items-center {
+    display: flex;
+    align-items: center;
+}
+.flex.justify-center {
+    display: flex;
+    justify-content: center;
+}
+.flex.all-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.flex.gap-md {
+    gap: 10px;
+}
+.flex.column {
+    display: flex;
+    flex-direction: column;
+}
+.btn {
+    display: block;
+    width: fit-content;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid transparent;
+    color: #fff;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+.btn.btn-success {
+  background: rgb(7, 205, 7);  
+}
+.my-md {
+    margin: 10px 0;
+}
+.mx-md {
+    margin: 0 10px;
+}
+.btn.btn-primary {
+    background: rgb(9, 131, 253);  
+}
+.btn.btn-primary:hover {
+    background: rgb(0, 64, 255);  
+}
+.textarea-custom {
+    width: 500px;
+    height: 300px;
+    border-radius: 20px;
+}
+.p-md {
+    padding: 15px;
+}
+.form-control {
+    display: block;
+    width: fit-content;
+    background: rgb(0, 163, 0);
+    color: #fff;
+    border: 1px solid transparent;
+    border-radius: 10px;
+    padding: 5px 10px;
+}
+.input-control {
+    display: block;
+    /* height: 30px; */
+    width: 300px;
+    border-radius: 10px;
+    padding: 10px;
+}
